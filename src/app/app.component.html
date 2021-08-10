@@ -1,0 +1,29 @@
+<div class="container" style="position: relative; padding: 10px;" *ngIf="groups && groups.length; else justAdd">
+  <div cdkDropListGroup style="display: inline-block;">
+    <div class="example-container" *ngFor="let group of groups">
+      <h2>{{ group.title }} - {{ getTotals(group) }}</h2>
+    
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="group.data"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of group.data" cdkDrag>{{item.title}} - {{ item.score }}</div>
+        <div class="example-box" cdkDrag [cdkDragDisabled]="true">
+          <button (click)="addItem(group)" mat-flat-button color="primary">Add item</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="example-container">
+    <button mat-flat-button color="accent" (click)="addGroup()">Add Group</button>
+  </div>
+</div>
+<ng-template #justAdd>
+  <div class="block-btn">
+    <button (click)="addGroup()" mat-stroked-button>Add a group to start</button>
+  </div>
+</ng-template>
+
+
