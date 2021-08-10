@@ -1,5 +1,13 @@
 # Planner
 
+## Info
+This is a simple planner that allows adding tasks to a group and moving them between groups. It allows us to set a score on the task and the total for all the tasks is shown on the top in the group name
+
+## TODOs
+- Allow Edit/Delete of groups and tasks
+- Allow saving the groups as a template to localStorage so that the user can start with a template
+
+## Angular CLI
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
 
 ## Development server
