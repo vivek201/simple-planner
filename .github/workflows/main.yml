@@ -47,4 +47,4 @@ jobs:
       - name: build and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run deploy
+        run: npm run ng -- deploy --base-href=/simple-planner/ --name="vivek201" --email="${{secrets.EMAIL}}" --no-silent
