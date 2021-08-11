@@ -54,6 +54,7 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+
 .group-title {
   display: flex;
   justify-content: space-between;
@@ -61,7 +62,10 @@
 }
 
 .item-title {
-  margin-right: 64px;
+  margin-right: 32px;
+  &.p-20 {
+    margin-right: 64px;
+  }
 }
 
 .block-btn {
@@ -90,6 +94,12 @@
   line-height: 32px;
   width: 32px;
   margin-left: 2px;
+}
+
+.mat-fab.close-screenshot {
+  position: fixed;
+  right: 20px;
+  bottom: 11px;
 }
 
 .spacer {

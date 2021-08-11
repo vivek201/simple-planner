@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, Optional } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GroupDialogComponent } from './dialogs/group.component';
 import { ItemDialogComponent } from './dialogs/item.component';
 import { SettingsDialogComponent } from './dialogs/settings.component';
@@ -15,6 +15,7 @@ import { SettingsService } from './services/settings.service';
 })
 export class AppComponent {
   groups: GroupModel[] = [];
+  screenshotMode = false;
   
   get autoSave() {
     return this.settingsService.getSettings().autoSave;
@@ -22,11 +23,17 @@ export class AppComponent {
 
   constructor(
     private dialog: MatDialog,
+    @Optional() private dialogRef: MatDialogRef<AppComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) private data: any,
     private settingsService: SettingsService
   ) { }
 
   ngOnInit() {
     this.groups = this.settingsService.getSettings().groups;
+    console.log(this.data);
+    if (this.data?.screenshotMode) {
+      this.screenshotMode = true;
+    }
   }
 
   drop(event: CdkDragDrop<ItemModel[]>) {
@@ -97,6 +104,20 @@ export class AppComponent {
         this.settingsService.saveGroups(this.groups);
       }
     });
+  }
+
+  openScreenshotMode() {
+    this.dialog.open(AppComponent, {
+      height: '100vh',
+      width: '100vw',
+      data: {
+        screenshotMode: true
+      }
+    });
+  }
+
+  closeScreenshotMode() {
+    this.dialogRef.close();
   }
 
   addItem(group: GroupModel) {
