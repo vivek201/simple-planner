@@ -10,6 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,12 +20,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { GroupDialogComponent } from './dialogs/group.component';
 import { ItemDialogComponent } from './dialogs/item.component';
+import { SettingsDialogComponent } from './dialogs/settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GroupDialogComponent,
-    ItemDialogComponent
+    ItemDialogComponent,
+    SettingsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +44,9 @@ import { ItemDialogComponent } from './dialogs/item.component';
     MatChipsModule,
     MatBadgeModule,
     MatMenuModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatCheckboxModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, width: '400px'}}

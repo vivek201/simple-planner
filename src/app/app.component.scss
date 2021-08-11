@@ -65,7 +65,7 @@
 }
 
 .block-btn {
-  height: 100%;
+  height: calc(100% - 64px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +90,10 @@
   line-height: 32px;
   width: 32px;
   margin-left: 2px;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
 
 .score-2 {

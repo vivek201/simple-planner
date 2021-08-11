@@ -1,3 +1,10 @@
+<mat-toolbar color="primary">
+  <span>Just a Simple Planner</span>
+  <span class="spacer"></span>
+  <button mat-button (click)="openSettings()">
+    <mat-icon>settings</mat-icon>
+  </button>
+</mat-toolbar>
 <div class="container" style="position: relative; padding: 10px;" *ngIf="groups && groups.length; else justAdd">
   <div cdkDropListGroup style="display: inline-block;">
     <div class="example-container" *ngFor="let group of groups">

@@ -3,8 +3,10 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GroupDialogComponent } from './dialogs/group.component';
 import { ItemDialogComponent } from './dialogs/item.component';
+import { SettingsDialogComponent } from './dialogs/settings.component';
 import { GroupModel } from './models/group.model';
 import { ItemModel } from './models/item.model';
+import { SettingsService } from './services/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +15,18 @@ import { ItemModel } from './models/item.model';
 })
 export class AppComponent {
   groups: GroupModel[] = [];
+  
+  get autoSave() {
+    return this.settingsService.getSettings().autoSave;
+  }
 
   constructor(
-    private dialog: MatDialog
-  ) {
+    private dialog: MatDialog,
+    private settingsService: SettingsService
+  ) { }
+
+  ngOnInit() {
+    this.groups = this.settingsService.getSettings().groups;
   }
 
   drop(event: CdkDragDrop<ItemModel[]>) {
@@ -38,6 +48,8 @@ export class AppComponent {
           title: result.title,
           data: []
         } as GroupModel);
+
+        this.settingsService.saveGroups(this.groups);
       }
     });
   }
@@ -48,7 +60,9 @@ export class AppComponent {
     });
     dialogRef.afterClosed().subscribe((result: GroupModel) => {
       if (result?.title) {
-        group.title = result.title
+        group.title = result.title;
+
+        this.settingsService.saveGroups(this.groups);
       }
     });
   }
@@ -58,7 +72,31 @@ export class AppComponent {
     if (t) {
       let index = this.groups.findIndex(x => x == group);
       this.groups.splice(index, 1);
+
+      this.settingsService.saveGroups(this.groups);
     }
+  }
+  
+  openSettings() {
+    const dialogRef = this.dialog.open(SettingsDialogComponent, {
+      data: {
+        hasItems: !!this.groups.find(x => x.data.length),
+        hasGroups: !!this.groups.length
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.clearAllItems) {
+          this.groups.forEach(x => {
+            x.data = [];
+          });
+        }
+        if (result.clearAllData) {
+          this.groups = []
+        }
+        this.settingsService.saveGroups(this.groups);
+      }
+    });
   }
 
   addItem(group: GroupModel) {
@@ -69,6 +107,8 @@ export class AppComponent {
           title: result.title,
           score: result.score
         });
+
+        this.settingsService.saveGroups(this.groups);
       }
     });
   }
@@ -81,6 +121,8 @@ export class AppComponent {
       if (result?.title && result?.score) {
         item.title = result.title;
         item.score = result.score;
+
+        this.settingsService.saveGroups(this.groups);
       }
     });
   }
@@ -90,6 +132,8 @@ export class AppComponent {
     if (t) {
       let index = data.findIndex(x => x == item);
       data.splice(index, 1);
+
+      this.settingsService.saveGroups(this.groups);
     }
   }
 
