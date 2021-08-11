@@ -3,11 +3,26 @@
     <div class="example-container" *ngFor="let group of groups">
       <h2 class="group-title">
         {{ group.title }}
-        <mat-chip-list>
-          <mat-chip color="primary" selected>
-            {{ getTotals(group) }}
-          </mat-chip>
-        </mat-chip-list>
+        <span style="display:flex">
+          <mat-chip-list>
+            <mat-chip color="primary" selected>
+              {{ getTotals(group) }}
+            </mat-chip>
+          </mat-chip-list>
+          <button class="more-btn" [matMenuTriggerFor]="menu" mat-icon-button aria-label="More Options for Group">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editGroup(group)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteGroup(group)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </span>
       </h2>
     
       <div
