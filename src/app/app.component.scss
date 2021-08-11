@@ -4,6 +4,8 @@
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
+  background: white;
+  padding: 20px 10px;
 }
 
 .example-list {
@@ -28,6 +30,17 @@
   background: white;
   font-size: 14px;
   position: relative;
+}
+
+.example-handle {
+  color: #ccc;
+  cursor: move;
+  width: 32px;
+  height: 32px;
+  svg {
+    padding-top: 5px;
+    padding-left: 5px;
+  }
 }
 
 .cdk-drag-preview {
@@ -117,4 +130,10 @@
 }
 .score-8 {
   background-color: #f8cecc;
+}
+
+::ng-deep .screenshot-mode {
+  .example-box {
+    cursor: default;
+  }
 }

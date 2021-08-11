@@ -45,6 +45,12 @@ export class AppComponent {
                         event.previousIndex,
                         event.currentIndex);
     }
+    this.settingsService.saveGroups(this.groups);
+  }
+
+  dropGroup(event: CdkDragDrop<GroupModel[]>) {
+    moveItemInArray(this.groups, event.previousIndex, event.currentIndex);
+    this.settingsService.saveGroups(this.groups);
   }
 
   addGroup() {
@@ -110,6 +116,7 @@ export class AppComponent {
     this.dialog.open(AppComponent, {
       height: '100vh',
       width: '100vw',
+      panelClass: 'screenshot-mode',
       data: {
         screenshotMode: true
       }
