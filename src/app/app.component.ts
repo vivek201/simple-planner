@@ -64,6 +64,14 @@ export class AppComponent {
     });
   }
 
+  deleteItem(item: {title: string, score: number}, data: any[]) {
+    let t = confirm("Are you sure you want to delete this item?");
+    if (t) {
+      let index = data.findIndex(x => x == item);
+      data.splice(index, 1);
+    }
+  }
+
   getTotals(group: {data: any[]}) {
     let sum = 0;
     if (group?.data?.length) {

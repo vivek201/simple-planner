@@ -17,12 +17,17 @@
         class="example-list"
         (cdkDropListDropped)="drop($event)">
         <div class="example-box" *ngFor="let item of group.data" [ngClass]="'score-' + item.score" cdkDrag>
-          <span [matBadge]="item.score" matBadgeOverlap="false">
+          <span class="item-title" [matBadge]="item.score" matBadgeOverlap="false">
             {{item.title}}
           </span>
-          <button mat-button (click)="editItem(item)">
-            <mat-icon>edit</mat-icon>
-          </button>
+          <div class="btn-group">
+            <button mat-button (click)="editItem(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-button (click)="deleteItem(item, group.data)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
         </div>
         <div class="example-box" cdkDrag [cdkDragDisabled]="true">
           <button (click)="addItem(group)" mat-flat-button color="primary">Add item</button>

@@ -27,6 +27,7 @@
   cursor: move;
   background: white;
   font-size: 14px;
+  position: relative;
 }
 
 .cdk-drag-preview {
@@ -59,6 +60,10 @@
   padding: 0 15px;
 }
 
+.item-title {
+  margin-right: 64px;
+}
+
 .block-btn {
   height: 100%;
   display: flex;
@@ -66,6 +71,18 @@
   align-items: center;
   button {
     padding: 15px 30px;
+  }
+}
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  .mat-button {
+    line-height: 30px;
+  }
+  .mat-icon {
+    font-size: 16px;
   }
 }
 .score-2 {
