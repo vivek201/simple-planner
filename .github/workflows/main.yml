@@ -44,7 +44,7 @@ jobs:
         if: 
           steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: npm install
-      - name: build
-        run: npm run build
-      - name: deploy
+      - name: build and deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run deploy
