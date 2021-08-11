@@ -10,55 +10,58 @@
 </mat-toolbar>
 <div class="container" style="position: relative; padding: 10px;" *ngIf="groups && groups.length; else justAdd">
   <div cdkDropListGroup style="display: inline-block;">
-    <div class="example-container" *ngFor="let group of groups">
-      <h2 class="group-title">
-        {{ group.title }}
-        <span style="display:flex">
-          <mat-chip-list>
-            <mat-chip color="primary" selected>
-              {{ getTotals(group) }}
-            </mat-chip>
-          </mat-chip-list>
-          <button *ngIf="!screenshotMode" class="more-btn" [matMenuTriggerFor]="menu" mat-icon-button aria-label="More Options for Group">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="editGroup(group)">
-              <mat-icon>edit</mat-icon>
-              <span>Edit</span>
+    <ng-container *ngFor="let group of groups">
+      <div class="example-container" *ngIf="!screenshotMode || group.data.length">
+        <h2 class="group-title">
+          {{ group.title }}
+          <span style="display:flex">
+            <mat-chip-list>
+              <mat-chip color="primary" selected>
+                {{ getTotals(group) }}
+              </mat-chip>
+            </mat-chip-list>
+            <button *ngIf="!screenshotMode" class="more-btn" [matMenuTriggerFor]="menu" mat-icon-button aria-label="More Options for Group">
+              <mat-icon>more_vert</mat-icon>
             </button>
-            <button mat-menu-item (click)="deleteGroup(group)">
-              <mat-icon>delete</mat-icon>
-              <span>Delete</span>
-            </button>
-          </mat-menu>
-        </span>
-      </h2>
-    
-      <div
-        cdkDropList
-        #todoList="cdkDropList"
-        [cdkDropListData]="group.data"
-        class="example-list"
-        (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let item of group.data" [ngClass]="'score-' + item.score" cdkDrag [cdkDragDisabled]="screenshotMode">
-          <span class="item-title" [ngClass]="{'p-20': !screenshotMode}" [matBadge]="item.score" matBadgeOverlap="false">
-            {{item.title}}
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editGroup(group)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="deleteGroup(group)">
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
           </span>
-          <div class="btn-group" *ngIf="!screenshotMode">
-            <button mat-button (click)="editItem(item)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-button (click)="deleteItem(item, group.data)">
-              <mat-icon>delete</mat-icon>
-            </button>
+        </h2>
+      
+        <div
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="group.data"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+          >
+          <div class="example-box" *ngFor="let item of group.data" [ngClass]="'score-' + item.score" cdkDrag [cdkDragDisabled]="screenshotMode">
+            <span class="item-title" [ngClass]="{'p-20': !screenshotMode}" [matBadge]="item.score" matBadgeOverlap="false">
+              {{item.title}}
+            </span>
+            <div class="btn-group" *ngIf="!screenshotMode">
+              <button mat-button (click)="editItem(item)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-button (click)="deleteItem(item, group.data)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="!screenshotMode" class="example-box add-item-container" cdkDrag [cdkDragDisabled]="true">
+            <button (click)="addItem(group)" mat-flat-button color="primary">Add item</button>
           </div>
         </div>
-        <div *ngIf="!screenshotMode" class="example-box add-item-container" cdkDrag [cdkDragDisabled]="true">
-          <button (click)="addItem(group)" mat-flat-button color="primary">Add item</button>
-        </div>
       </div>
-    </div>
+    </ng-container>
   </div>
   <div class="example-container" *ngIf="!screenshotMode">
     <button mat-flat-button color="accent" (click)="addGroup()">Add Group</button>
