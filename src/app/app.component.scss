@@ -4,6 +4,8 @@
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
+  background: white;
+  padding: 20px 10px;
 }
 
 .example-list {
@@ -27,6 +29,18 @@
   cursor: move;
   background: white;
   font-size: 14px;
+  position: relative;
+}
+
+.example-handle {
+  color: #ccc;
+  cursor: move;
+  width: 32px;
+  height: 32px;
+  svg {
+    padding-top: 5px;
+    padding-left: 5px;
+  }
 }
 
 .cdk-drag-preview {
@@ -53,14 +67,22 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+
 .group-title {
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
 }
 
+.item-title {
+  margin-right: 32px;
+  &.p-20 {
+    margin-right: 64px;
+  }
+}
+
 .block-btn {
-  height: 100%;
+  height: calc(100% - 64px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,6 +90,35 @@
     padding: 15px 30px;
   }
 }
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  .mat-button {
+    line-height: 30px;
+  }
+  .mat-icon {
+    font-size: 16px;
+  }
+}
+.more-btn {
+  height: 32px;
+  line-height: 32px;
+  width: 32px;
+  margin-left: 2px;
+}
+
+.mat-fab.close-screenshot {
+  position: fixed;
+  right: 20px;
+  bottom: 11px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
 .score-2 {
   background-color: #f4f2e9;
 }
@@ -79,4 +130,10 @@
 }
 .score-8 {
   background-color: #f8cecc;
+}
+
+::ng-deep .screenshot-mode {
+  .example-box {
+    cursor: default;
+  }
 }

@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { Component, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { GroupModel } from "../models/group.model";
 
 @Component({
   template: `
@@ -22,14 +23,19 @@ export class GroupDialogComponent {
   groupName="";
 
   constructor(
-    private dialogRef: MatDialogRef<GroupDialogComponent>
-  ){}
+    private dialogRef: MatDialogRef<GroupDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: GroupModel
+  ){
+    if (data) {
+      this.groupName = data.title;
+    }
+  }
 
   onSave() {
     if (this.groupName) {
       this.dialogRef.close({
-        groupName: this.groupName
-      });
+        title: this.groupName
+      } as GroupModel);
     }
   }
 

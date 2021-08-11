@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { ItemModel } from "../models/item.model";
 
 @Component({
   template: `
@@ -33,7 +34,7 @@ export class ItemDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<ItemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {title: string, score: number}
+    @Inject(MAT_DIALOG_DATA) public data: ItemModel
   ){
     if (data) {
       this.itemName = data.title;
@@ -44,9 +45,9 @@ export class ItemDialogComponent {
   onSave() {
     if (this.itemName && this.score) {
       this.dialogRef.close({
-        itemName: this.itemName,
+        title: this.itemName,
         score: this.score
-      });
+      } as ItemModel);
     }
   }
 
