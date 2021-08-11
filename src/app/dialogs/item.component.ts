@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
+import { Component, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   template: `
@@ -32,8 +32,14 @@ export class ItemDialogComponent {
   scores = [1,2,3,5,8];
 
   constructor(
-    private dialogRef: MatDialogRef<ItemDialogComponent>
-  ){}
+    private dialogRef: MatDialogRef<ItemDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {title: string, score: number}
+  ){
+    if (data) {
+      this.itemName = data.title;
+      this.score = data.score;
+    }
+  }
 
   onSave() {
     if (this.itemName && this.score) {
