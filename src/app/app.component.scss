@@ -53,6 +53,12 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
+.group-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
 .block-btn {
   height: 100%;
   display: flex;
@@ -61,4 +67,16 @@
   button {
     padding: 15px 30px;
   }
+}
+.score-2 {
+  background-color: #f4f2e9;
+}
+.score-3 {
+  background-color: #dae8fc;
+}
+.score-5 {
+  background-color: #fff2cc;
+}
+.score-8 {
+  background-color: #f8cecc;
 }

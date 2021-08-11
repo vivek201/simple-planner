@@ -52,6 +52,18 @@ export class AppComponent {
     });
   }
 
+  editItem(item: {title: string, score: number}) {
+    const dialogRef = this.dialog.open(ItemDialogComponent, {
+      data: item
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result?.itemName && result?.score) {
+        item.title = result.itemName;
+        item.score = result.score;
+      }
+    });
+  }
+
   getTotals(group: {data: any[]}) {
     let sum = 0;
     if (group?.data?.length) {
