@@ -45,4 +45,6 @@ jobs:
           steps.cache-nodemodules.outputs.cache-hit != 'true'
         run: npm install
       - name: build
-        run: npm run build -- --prod
+        run: npm run build
+      - name: deploy
+        run: npm run deploy
