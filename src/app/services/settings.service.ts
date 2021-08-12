@@ -24,6 +24,11 @@ export class SettingsService {
     const storageData = this._localStorage.getItem(this.key);
     if (storageData) {
       this.settings = JSON.parse(storageData);
+    } else {
+      this.settings = {
+        autoSave: true,
+        groups: []
+      };
     }
     return this.settings;
   }
