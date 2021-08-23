@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { GroupModel } from "../models/group.model";
 
@@ -9,7 +9,7 @@ import { GroupModel } from "../models/group.model";
       <div mat-dialog-content>
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
-          <input type="text" name="groupName" matInput [(ngModel)]="groupName" required>
+          <input #input type="text" name="groupName" matInput [(ngModel)]="groupName" required>
         </mat-form-field>
       </div>
       <div mat-dialog-actions>
@@ -21,14 +21,22 @@ import { GroupModel } from "../models/group.model";
 })
 export class GroupDialogComponent {
   groupName="";
+  @ViewChild('input')
+  input!: ElementRef;
 
   constructor(
     private dialogRef: MatDialogRef<GroupDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: GroupModel
+    @Inject(MAT_DIALOG_DATA) public data: GroupModel,
+    private cd: ChangeDetectorRef
   ){
     if (data) {
       this.groupName = data.title;
     }
+  }
+
+  ngAfterViewInit() {
+    this.input.nativeElement.focus();
+    this.cd.detectChanges();
   }
 
   onSave() {

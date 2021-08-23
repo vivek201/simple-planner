@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ItemModel } from "../models/item.model";
 
@@ -9,7 +9,7 @@ import { ItemModel } from "../models/item.model";
       <div mat-dialog-content>
         <mat-form-field appearance="fill" style="display:block">
           <mat-label>Name</mat-label>
-          <input type="text" name="itemName" matInput [(ngModel)]="itemName" required>
+          <input #input type="text" name="itemName" matInput [(ngModel)]="itemName" required>
         </mat-form-field>
         <mat-form-field appearance="fill" style="display:block">
           <mat-label>Score</mat-label>
@@ -32,14 +32,23 @@ export class ItemDialogComponent {
   score = 0;
   scores = [1,2,3,5,8];
 
+  @ViewChild('input')
+  input!: ElementRef;
+
   constructor(
     private dialogRef: MatDialogRef<ItemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ItemModel
+    @Inject(MAT_DIALOG_DATA) public data: ItemModel,
+    private cd: ChangeDetectorRef
   ){
     if (data) {
       this.itemName = data.title;
       this.score = data.score;
     }
+  }
+
+  ngAfterViewInit() {
+    this.input.nativeElement.focus()
+    this.cd.detectChanges();
   }
 
   onSave() {

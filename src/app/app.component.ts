@@ -30,7 +30,6 @@ export class AppComponent {
 
   ngOnInit() {
     this.groups = this.settingsService.getSettings().groups;
-    console.log(this.data);
     if (this.data?.screenshotMode) {
       this.screenshotMode = true;
     }
