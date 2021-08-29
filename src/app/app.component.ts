@@ -1,6 +1,7 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, Inject, OnChanges, Optional, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SortableOptions } from 'sortablejs';
 import { GroupDialogComponent } from './dialogs/group.component';
 import { ItemDialogComponent } from './dialogs/item.component';
 import { SettingsDialogComponent } from './dialogs/settings.component';
@@ -16,6 +17,12 @@ import { SettingsService } from './services/settings.service';
 export class AppComponent {
   groups: GroupModel[] = [];
   screenshotMode = false;
+  groupSortableOptions: SortableOptions = {
+    handle: '.example-handle',
+    onUpdate: () => {
+      this.settingsService.saveGroups(this.groups);
+    }
+  }
   
   get autoSave() {
     return this.settingsService.getSettings().autoSave;
@@ -44,11 +51,6 @@ export class AppComponent {
                         event.previousIndex,
                         event.currentIndex);
     }
-    this.settingsService.saveGroups(this.groups);
-  }
-
-  dropGroup(event: CdkDragDrop<GroupModel[]>) {
-    moveItemInArray(this.groups, event.previousIndex, event.currentIndex);
     this.settingsService.saveGroups(this.groups);
   }
 

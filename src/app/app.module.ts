@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { GroupDialogComponent } from './dialogs/group.component';
 import { ItemDialogComponent } from './dialogs/item.component';
 import { SettingsDialogComponent } from './dialogs/settings.component';
+import { SortablejsModule } from 'ngx-sortablejs';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,9 @@ import { SettingsDialogComponent } from './dialogs/settings.component';
     MatMenuModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+
+    SortablejsModule.forRoot({animation: 120})
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true, width: '400px'}}
