@@ -2,12 +2,12 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, Inject, OnChanges, Optional, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SortableOptions } from 'sortablejs';
-import { GroupDialogComponent } from './dialogs/group.component';
-import { ItemDialogComponent } from './dialogs/item.component';
-import { SettingsDialogComponent } from './dialogs/settings.component';
-import { GroupModel } from './models/group.model';
-import { ItemModel } from './models/item.model';
-import { SettingsService } from './services/settings.service';
+import { GroupDialogComponent } from './dialogs/group-dialog.component';
+import { ItemDialogComponent } from './dialogs/item-dialog.component';
+import { SettingsDialogComponent } from './dialogs/settings-dialog.component';
+import { GroupModel } from './_models/group.model';
+import { ItemModel } from './_models/item.model';
+import { SettingsService } from './_services/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -19,9 +19,7 @@ export class AppComponent {
   screenshotMode = false;
   groupSortableOptions: SortableOptions = {
     handle: '.example-handle',
-    onUpdate: () => {
-      this.settingsService.saveGroups(this.groups);
-    }
+    onUpdate: () => this.saveAll()
   }
   
   get autoSave() {
@@ -42,18 +40,6 @@ export class AppComponent {
     }
   }
 
-  drop(event: CdkDragDrop<ItemModel[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
-    }
-    this.settingsService.saveGroups(this.groups);
-  }
-
   addGroup() {
     const dialogRef = this.dialog.open(GroupDialogComponent);
     dialogRef.afterClosed().subscribe((result: GroupModel) => {
@@ -63,32 +49,24 @@ export class AppComponent {
           data: []
         } as GroupModel);
 
-        this.settingsService.saveGroups(this.groups);
+        this.saveAll();
       }
     });
   }
 
-  editGroup(group: GroupModel) {
-    const dialogRef = this.dialog.open(GroupDialogComponent, {
-      data: group
-    });
-    dialogRef.afterClosed().subscribe((result: GroupModel) => {
-      if (result?.title) {
-        group.title = result.title;
-
-        this.settingsService.saveGroups(this.groups);
-      }
-    });
+  onGroupEdited() {
+    this.saveAll();
   }
 
-  deleteGroup(group: GroupModel) {
-    let t = confirm("Are you sure you want to delete this group?");
-    if (t) {
-      let index = this.groups.findIndex(x => x == group);
-      this.groups.splice(index, 1);
+  onGroupDeleted(group: GroupModel) {
+    let index = this.groups.findIndex(x => x == group);
+    this.groups.splice(index, 1);
 
-      this.settingsService.saveGroups(this.groups);
-    }
+    this.saveAll();
+  }
+
+  saveAll() {
+    this.settingsService.saveGroups(this.groups);
   }
   
   openSettings() {
@@ -108,7 +86,7 @@ export class AppComponent {
         if (result.clearAllData) {
           this.groups = []
         }
-        this.settingsService.saveGroups(this.groups);
+        this.saveAll();
       }
     });
   }
@@ -126,51 +104,5 @@ export class AppComponent {
 
   closeScreenshotMode() {
     this.dialogRef.close();
-  }
-
-  addItem(group: GroupModel) {
-    const dialogRef = this.dialog.open(ItemDialogComponent);
-    dialogRef.afterClosed().subscribe((result: ItemModel) => {
-      if (result?.title && result?.score) {
-        group.data.push({
-          title: result.title,
-          score: result.score
-        });
-
-        this.settingsService.saveGroups(this.groups);
-      }
-    });
-  }
-
-  editItem(item: ItemModel) {
-    const dialogRef = this.dialog.open(ItemDialogComponent, {
-      data: item
-    });
-    dialogRef.afterClosed().subscribe((result: ItemModel) => {
-      if (result?.title && result?.score) {
-        item.title = result.title;
-        item.score = result.score;
-
-        this.settingsService.saveGroups(this.groups);
-      }
-    });
-  }
-
-  deleteItem(item: ItemModel, data: ItemModel[]) {
-    let t = confirm("Are you sure you want to delete this item?");
-    if (t) {
-      let index = data.findIndex(x => x == item);
-      data.splice(index, 1);
-
-      this.settingsService.saveGroups(this.groups);
-    }
-  }
-
-  getTotals(group: GroupModel) {
-    let sum = 0;
-    if (group?.data?.length) {
-      group.data.forEach(x => sum += x.score);
-    }
-    return sum;
   }
 }

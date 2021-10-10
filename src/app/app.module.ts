@@ -18,10 +18,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { GroupDialogComponent } from './dialogs/group.component';
-import { ItemDialogComponent } from './dialogs/item.component';
-import { SettingsDialogComponent } from './dialogs/settings.component';
+import { GroupDialogComponent } from './dialogs/group-dialog.component';
+import { ItemDialogComponent } from './dialogs/item-dialog.component';
+import { SettingsDialogComponent } from './dialogs/settings-dialog.component';
 import { SortablejsModule } from 'ngx-sortablejs';
+import { ItemComponent } from './item/item.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,9 @@ import { SortablejsModule } from 'ngx-sortablejs';
     GroupDialogComponent,
     ItemDialogComponent,
     SettingsDialogComponent,
+
+    ItemComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,
