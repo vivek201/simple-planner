@@ -39,6 +39,9 @@ export class ItemComponent {
   }
 
   deleteItem() {
-    this.itemDeleted.emit(this.item);
+    let t = confirm("Are you sure you want to delete this item?");
+    if (t) {
+      this.itemDeleted.emit(this.item);
+    }
   }
 }

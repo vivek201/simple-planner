@@ -23,6 +23,7 @@ import { ItemDialogComponent } from './dialogs/item-dialog.component';
 import { SettingsDialogComponent } from './dialogs/settings-dialog.component';
 import { SortablejsModule } from 'ngx-sortablejs';
 import { ItemComponent } from './item/item.component';
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ItemComponent } from './item/item.component';
     ItemDialogComponent,
     SettingsDialogComponent,
 
-    ItemComponent
+    ItemComponent,
+    GroupComponent
   ],
   imports: [
     BrowserModule,

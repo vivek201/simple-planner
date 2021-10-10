@@ -8,40 +8,6 @@
   padding: 20px 10px;
 }
 
-.example-list {
-  border: solid 1px #ccc;
-  min-height: 60px;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  display: block;
-}
-
-.example-handle {
-  color: #ccc;
-  cursor: move;
-  width: 32px;
-  height: 32px;
-  svg {
-    padding-top: 5px;
-    padding-left: 5px;
-  }
-}
-
-.example-box:last-child {
-  border: none;
-}
-
-.group {
-  display: inline-block;
-}
-
-.group-title {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 15px;
-}
-
 .block-btn {
   height: calc(100% - 64px);
   display: flex;
