@@ -49,19 +49,11 @@
           class="example-list"
           (cdkDropListDropped)="drop($event)"
           >
-          <div class="example-box" *ngFor="let item of group.data" [ngClass]="'score-' + item.score" cdkDrag [cdkDragDisabled]="screenshotMode">
-            <span class="item-title" [ngClass]="{'p-20': !screenshotMode}" [matBadge]="item.score" matBadgeOverlap="false">
-              {{item.title}}
-            </span>
-            <div class="btn-group" *ngIf="!screenshotMode">
-              <button mat-button (click)="editItem(item)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-button (click)="deleteItem(item, group.data)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
+          <app-item *ngFor="let item of group.data"
+            [item]="item"
+            [screenshotMode]="screenshotMode"
+            cdkDrag [cdkDragDisabled]="screenshotMode"
+          ></app-item>
           <div *ngIf="!screenshotMode" class="example-box add-item-container">
             <button (click)="addItem(group)" mat-flat-button color="primary">Add item</button>
           </div>
