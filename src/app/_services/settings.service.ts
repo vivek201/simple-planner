@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { GroupModel } from "../models/group.model";
-import { SettingsModel } from "../models/settings.model";
+import { GroupModel } from "../_models/group.model";
+import { SettingsModel } from "../_models/settings.model";
 
 @Injectable({
   providedIn: 'root'

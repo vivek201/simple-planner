@@ -10,64 +10,13 @@
 </mat-toolbar>
 <div cdkDropListGroup class="container" style="position: relative; padding: 10px;" *ngIf="groups && groups.length; else justAdd">
   <div [sortablejs]="groups" [sortablejsOptions]="groupSortableOptions">
-    <div class="group" *ngFor="let group of groups">
-      <div class="example-container" *ngIf="!screenshotMode || group.data.length">
-        <h2 class="group-title">
-          {{ group.title }}
-          <span style="display:flex">
-            <mat-chip-list>
-              <mat-chip color="primary" selected>
-                {{ getTotals(group) }}
-              </mat-chip>
-            </mat-chip-list>
-            <button *ngIf="!screenshotMode" class="more-btn" [matMenuTriggerFor]="menu" mat-icon-button aria-label="More Options for Group">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editGroup(group)">
-                <mat-icon>edit</mat-icon>
-                <span>Edit</span>
-              </button>
-              <button mat-menu-item (click)="deleteGroup(group)">
-                <mat-icon>delete</mat-icon>
-                <span>Delete</span>
-              </button>
-            </mat-menu>
-            <div *ngIf="!screenshotMode" class="example-handle">
-              <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
-                <path d="M0 0h24v24H0z" fill="none"></path>
-              </svg>
-            </div>
-          </span>
-        </h2>
-      
-        <div
-          cdkDropList
-          #todoList="cdkDropList"
-          [cdkDropListData]="group.data"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)"
-          >
-          <div class="example-box" *ngFor="let item of group.data" [ngClass]="'score-' + item.score" cdkDrag [cdkDragDisabled]="screenshotMode">
-            <span class="item-title" [ngClass]="{'p-20': !screenshotMode}" [matBadge]="item.score" matBadgeOverlap="false">
-              {{item.title}}
-            </span>
-            <div class="btn-group" *ngIf="!screenshotMode">
-              <button mat-button (click)="editItem(item)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-button (click)="deleteItem(item, group.data)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </div>
-          <div *ngIf="!screenshotMode" class="example-box add-item-container">
-            <button (click)="addItem(group)" mat-flat-button color="primary">Add item</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-group
+      *ngFor="let group of groups"
+      [group]="group"
+      [screenshotMode]="screenshotMode"
+      (groupEdited)="onGroupEdited()"
+      (groupDeleted)="onGroupDeleted($event)"
+    ></app-group>
   </div>
   <div class="example-container" *ngIf="!screenshotMode">
     <button mat-flat-button color="accent" (click)="addGroup()">Add Group</button>
@@ -81,5 +30,3 @@
 <button *ngIf="screenshotMode" matTooltip="Click here to exit screenshot mode" mat-fab class="close-screenshot" (click)="closeScreenshotMode()">
   <mat-icon>close</mat-icon>
 </button>
-
-
