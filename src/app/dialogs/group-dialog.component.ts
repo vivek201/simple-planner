@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { GroupModel } from "../models/group.model";
+import { GroupModel } from "../_models/group.model";
 
 @Component({
   template: `

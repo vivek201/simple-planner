@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { SettingsService } from "../services/settings.service";
+import { SettingsService } from "../_services/settings.service";
 
 @Component({
   template: `

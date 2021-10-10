@@ -2,12 +2,12 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { Component, Inject, OnChanges, Optional, SimpleChanges } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SortableOptions } from 'sortablejs';
-import { GroupDialogComponent } from './dialogs/group.component';
-import { ItemDialogComponent } from './dialogs/item.component';
-import { SettingsDialogComponent } from './dialogs/settings.component';
-import { GroupModel } from './models/group.model';
-import { ItemModel } from './models/item.model';
-import { SettingsService } from './services/settings.service';
+import { GroupDialogComponent } from './dialogs/group-dialog.component';
+import { ItemDialogComponent } from './dialogs/item-dialog.component';
+import { SettingsDialogComponent } from './dialogs/settings-dialog.component';
+import { GroupModel } from './_models/group.model';
+import { ItemModel } from './_models/item.model';
+import { SettingsService } from './_services/settings.service';
 
 @Component({
   selector: 'app-root',

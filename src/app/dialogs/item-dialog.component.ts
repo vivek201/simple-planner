@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Inject, ViewChild } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { ItemModel } from "../models/item.model";
+import { ItemModel } from "../_models/item.model";
 
 @Component({
   template: `
