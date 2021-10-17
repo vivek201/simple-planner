@@ -24,6 +24,7 @@ import { SettingsDialogComponent } from './dialogs/settings-dialog.component';
 import { SortablejsModule } from 'ngx-sortablejs';
 import { ItemComponent } from './item/item.component';
 import { GroupComponent } from './group/group.component';
+import { AutoCompleteOffDirective } from './_directives/autocompleteoff.directive';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { GroupComponent } from './group/group.component';
     SettingsDialogComponent,
 
     ItemComponent,
-    GroupComponent
+    GroupComponent,
+    AutoCompleteOffDirective
   ],
   imports: [
     BrowserModule,
