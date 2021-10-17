@@ -4,12 +4,12 @@ import { ItemModel } from "../_models/item.model";
 
 @Component({
   template: `
-    <form (onSubmit)="onSave()">
+    <form (onSubmit)="onSave()" autocomplete="off">
       <h1 mat-dialog-title>Add an item</h1>
       <div mat-dialog-content>
         <mat-form-field appearance="fill" style="display:block">
           <mat-label>Name</mat-label>
-          <input #input type="text" name="itemName" matInput [(ngModel)]="itemName" required>
+          <input #input type="text" name="itemName" matInput [(ngModel)]="itemName" required autocompleteoff>
         </mat-form-field>
         <mat-form-field appearance="fill" style="display:block">
           <mat-label>Score</mat-label>

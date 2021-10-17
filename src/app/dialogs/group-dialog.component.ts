@@ -4,12 +4,12 @@ import { GroupModel } from "../_models/group.model";
 
 @Component({
   template: `
-    <form (onSubmit)="onSave()">
+    <form (onSubmit)="onSave()" autocomplete="off">
       <h1 mat-dialog-title>Add a group</h1>
       <div mat-dialog-content>
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
-          <input #input type="text" name="groupName" matInput [(ngModel)]="groupName" required>
+          <input #input type="text" name="groupName" matInput [(ngModel)]="groupName" required autocompleteoff>
         </mat-form-field>
       </div>
       <div mat-dialog-actions>
