@@ -30,7 +30,7 @@ import { ItemModel } from "../_models/item.model";
 export class ItemDialogComponent {
   itemName = "";
   score = 0;
-  scores = [1,2,3,5,8];
+  scores = [1,2,3,5,8,13];
 
   @ViewChild('input')
   input!: ElementRef;
